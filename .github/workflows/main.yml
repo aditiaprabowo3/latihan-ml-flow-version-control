@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  CSV_URL: "Project/wine-quality.csv"
+  CSV_URL: "wine-quality.csv"
   TARGET_VAR: "quality"
   ALPHA: 0.5
   L1_RATIO: 0.5
@@ -32,7 +32,8 @@ jobs:
       # Check environment variables
       - name: Check Env
         run: |
-          echo $CSV_URL
+          echo "CSV: $CSV_URL"
+          echo "Target: $TARGET_VAR"
 
       # Install dependencies
       - name: Install dependencies
@@ -40,7 +41,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install mlflow
 
-      # Run MLflow project from local folder
+      # Run MLflow project from root folder
       - name: Run mlflow project
         run: |
-          mlflow run ./Project --env-manager=local
+          mlflow run . --env-manager=
